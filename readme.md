@@ -17,7 +17,7 @@ The game allows you to select a difficulty level and keeps track of your last 5 
 7. When you win, the result (difficulty and attempts) is saved in your game history.
 
 ## 📊 Statistics  
-The `/stats` command displays your last 5 games, sorted by the fewest attempts.  
+The `/stats` command displays your top 5 games, sorted by the fewest attempts.  
 
 ## How to start a game?
 You need to compile and start your project with these commands:

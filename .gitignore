@@ -1,0 +1,8 @@
+# Ignore build and temporary files
+*.log
+*.exe
+*.obj
+*.ilk
+*.pdb
+*.vcxproj.user
+x64/

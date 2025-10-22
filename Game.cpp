@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 
+//messages fro printing
 const std::string Game::CHOOSE_DIFFICULT_MESSAGE =
     "Please choose the difficulty of the game (easy / medium / high):";
 const std::string Game::CHOOSE_DIFFICULT_AGAIN_MESSAGE =
@@ -19,15 +20,19 @@ const std::string Game::TRY_TO_GUESS_NUMBER =
 const std::string Game::START_SCREEN_MESSAGE =
     "Hi! Write /start to start the game or /stats to view your last 5 games.";
 
+//method that prints start screen message
 void Game::start_screen() {
     print_something(START_SCREEN_MESSAGE);
 }
 
+//method that start game
 void Game::start_game() {
     while (true) {
         print_something(START_SCREEN_MESSAGE);
+        //get command from user /start or /stats
         std::string message_from_user = get_message_from_user();
 
+        //logic in game
         if (message_from_user == "/start") {
             Level level = get_difficult_of_game();
             int random_num = generate_num(level);
@@ -49,13 +54,19 @@ void Game::start_game() {
                 }
             }
 
-            // сохраняем количество попыток
-            // сохраняем результат
-        if (last_games.size() == 5) {
-            last_games.erase(last_games.begin());
-        }
+            
         last_games.push_back({ level, attempts });
 
+        // sorting low to high
+        std::sort(last_games.begin(), last_games.end(), [](const GameResult& a, const GameResult& b) {
+            return a.attempts < b.attempts;
+        });
+
+
+        // only top 5
+        if (last_games.size() > 5) {
+            last_games.resize(5);
+}
 
         } else if (message_from_user == "/stats") {
             print_stats();
@@ -64,28 +75,29 @@ void Game::start_game() {
         }
     }
 }
-
+//method that generates random secret number
 int Game::generate_num(Level level) {
     return rand() % level;
 }
 
+//method that take choose from user
 int Game::make_choose() {
     int res;
     std::cin >> res;
     return res;
 }
-
+//method that take /start or /stats from user
 std::string Game::get_message_from_user() {
     std::string input;
     std::cout << "\n> ";
     std::cin >> input;
     return input;
 }
-
+//method that print messages
 void Game::print_something(const std::string& message_to_print) {
     std::cout << message_to_print << std::endl;
 }
-
+//method that take difficult of game that user choose
 Level Game::get_difficult_of_game(bool repeat) {
     if (!repeat) {
         print_something(CHOOSE_DIFFICULT_MESSAGE);
@@ -107,7 +119,7 @@ Level Game::get_difficult_of_game(bool repeat) {
         return get_difficult_of_game(true);
     }
 }
-
+//method that prints stats
 void Game::print_stats() {
     if (last_games.empty()) {
         print_something("You have no games yet!");

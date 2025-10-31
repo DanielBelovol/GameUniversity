@@ -23,3 +23,6 @@ The `/stats` command displays your top 5 games, sorted by the fewest attempts.
 You need to compile and start your project with these commands:
 g++ Main.cpp Game.cpp -o GuessGame
 ./GuessGame
+
+![Image of program](Screenshot%202025-10-31%20at%2013.23.04.png)
+

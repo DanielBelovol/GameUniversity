@@ -12,6 +12,7 @@ enum Level {
 
 struct GameResult {
     Level level;
+    std::string name_of_user;
     int attempts;
 };
 
@@ -36,6 +37,7 @@ public:
 
 private:
     std::vector<GameResult> last_games;
+    void print_box(const std::string& text);
 };
 
 #endif

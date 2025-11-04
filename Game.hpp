@@ -1,4 +1,3 @@
-#ifndef GAME_HPP
 #define GAME_HPP
 
 #include <string>
@@ -31,7 +30,7 @@ public:
     void print_something(const std::string& message_to_print);
     Level get_difficult_of_game(bool repeat = false);
     int generate_num(Level level);
-    int make_choose();
+    int make_guess();
     std::string get_message_from_user();
     void print_stats();
 
@@ -39,5 +38,3 @@ private:
     std::vector<GameResult> last_games;
     void print_box(const std::string& text);
 };
-
-#endif

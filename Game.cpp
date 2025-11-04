@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 
-// Цвета ANSI для консоли
+// Ansi colors for console
 #define COLOR_RESET   "\033[0m"
 #define COLOR_GREEN   "\033[32m"
 #define COLOR_RED     "\033[31m"
@@ -25,28 +25,39 @@ const std::string Game::YOU_WIN =
 const std::string Game::TRY_TO_GUESS_NUMBER =
     "Try to guess the number in this range: from 0 to ";
 const std::string Game::START_SCREEN_MESSAGE =
-    "╔══════════════════════════════════╗\n"
-    "║  🎯 Guess the Number Game!       ║\n"
-    "║  Type /start to play             ║\n"
-    "║  Type /stats to see TOP 5        ║\n"
-    "╚══════════════════════════════════╝";
+"╔══════════════════════════════════╗\n"
+"║ 🎯 Guess the Number Game!        ║\n"
+"║ Type /start to play              ║\n"
+"║ Type /stats to see TOP 5         ║\n"
+"╚══════════════════════════════════╝\n";
 
+//method to print something in graphic box
 void Game::print_box(const std::string &text) {
     std::cout << COLOR_CYAN << "╔";
-    for (int i = 0; i < (int)text.size() + 2; i++) std::cout << "═";
-    std::cout << "╗\n║ " << text << " ║\n╚";
-    for (int i = 0; i < (int)text.size() + 2; i++) std::cout << "═";
-    std::cout << "╝" << COLOR_RESET << std::endl;
+    for(int i = 0; i<text.size();i++){
+        std::cout<<"═";
+    }
+    std::cout << "╗\n";
+    std::cout << "║"<< COLOR_CYAN<< text<< "║\n";
+    std::cout<<"╚";
+    for(int i = 0; i<text.size();i++){
+        std::cout<<"═";
+    }
+    std::cout<<"╝\n";
 }
 
+//main method to start game
 void Game::start_game() {
     while (true) {
-        std::cout << START_SCREEN_MESSAGE << std::endl;
+        std::cout<<COLOR_CYAN<<START_SCREEN_MESSAGE<<std::endl;
+        // /start or /stats
         std::string message_from_user = get_message_from_user();
 
         if (message_from_user == "/start") {
             std::string user_name;
+            //gettin difficult from user
             Level level = get_difficult_of_game();
+            //generating random number
             int random_num = generate_num(level);
             int num_from_user = -1;
             int attempts = 0;
@@ -55,7 +66,7 @@ void Game::start_game() {
 
             while (num_from_user != random_num) {
                 std::cout << COLOR_CYAN << "Enter number: " << COLOR_RESET;
-                num_from_user = make_choose();
+                num_from_user = make_guess();
                 attempts++;
 
                 if (num_from_user < random_num)
@@ -69,15 +80,17 @@ void Game::start_game() {
                 }
             }
 
-            // сохраняем результат
+            // saving results of game
             last_games.push_back({level, user_name, attempts});
 
-            // сортируем по попыткам (топ 5 лучших)
+            // sorting top 5 games
             std::sort(last_games.begin(), last_games.end(),
                       [](const GameResult &a, const GameResult &b) {
                           return a.attempts < b.attempts;
                       });
 
+
+            // if size of last games is bigger than 5 we change size to top 5
             if (last_games.size() > 5)
                 last_games.resize(5);
 
@@ -91,12 +104,14 @@ void Game::start_game() {
 
 int Game::generate_num(Level level) { return rand() % level; }
 
-int Game::make_choose() {
+//user tries to guess number
+int Game::make_guess() {
     int res;
     std::cin >> res;
     return res;
 }
 
+//user writes /start or /stats
 std::string Game::get_message_from_user() {
     std::string input;
     std::cout << COLOR_CYAN << "\n> " << COLOR_RESET;
@@ -104,10 +119,12 @@ std::string Game::get_message_from_user() {
     return input;
 }
 
+//method to print something
 void Game::print_something(const std::string &message_to_print) {
     std::cout << message_to_print << std::endl;
 }
 
+//user writes difficult of game
 Level Game::get_difficult_of_game(bool repeat) {
     if (!repeat)
         print_something(CHOOSE_DIFFICULT_MESSAGE);
@@ -128,6 +145,7 @@ Level Game::get_difficult_of_game(bool repeat) {
         return get_difficult_of_game(true);
 }
 
+//method that prints stats of games
 void Game::print_stats() {
     if (last_games.empty()) {
         print_box("You have no games yet!");

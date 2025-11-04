@@ -50,7 +50,7 @@ void Game::print_box(const std::string &text) {
 void Game::start_game() {
     while (true) {
         std::cout<<COLOR_CYAN<<START_SCREEN_MESSAGE<<std::endl;
-        // /start or /stats
+        // getting /start or /stats
         std::string message_from_user = get_message_from_user();
 
         if (message_from_user == "/start") {
@@ -62,6 +62,7 @@ void Game::start_game() {
             int num_from_user = -1;
             int attempts = 0;
 
+            //printing  TRY_TO_GUESS_NUMBER message inside the box
             print_box(TRY_TO_GUESS_NUMBER + std::to_string(level - 1));
 
             while (num_from_user != random_num) {
@@ -102,6 +103,7 @@ void Game::start_game() {
     }
 }
 
+//method receive level and then gives randon num in range of level
 int Game::generate_num(Level level) { return rand() % level; }
 
 //user tries to guess number

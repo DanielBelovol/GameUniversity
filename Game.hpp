@@ -17,7 +17,6 @@ struct GameResult {
 
 class Game {
 public:
-    // Статические строки
     static const std::string CHOOSE_DIFFICULT_MESSAGE;
     static const std::string CHOOSE_DIFFICULT_AGAIN_MESSAGE;
     static const std::string YOUR_NUMBER_IS_SMALLER_THAN_SECRET_NUMBER;

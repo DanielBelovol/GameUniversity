@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cctype>
+#include <vector>
 
 // Colors ANSI for console
 #define COLOR_RESET   "\033[0m"
@@ -17,10 +18,29 @@ const std::string Game::CHOOSE_DIFFICULT_MESSAGE =
     "Please choose the difficulty of the game (easy / medium / high):";
 const std::string Game::CHOOSE_DIFFICULT_AGAIN_MESSAGE =
     "Invalid input. Please choose the difficulty again (easy / medium / high):";
+
+// Random messages for too small
+const std::vector<std::string> SMALLER_MESSAGES = {
+    std::string(COLOR_YELLOW) + "❌ Too small! Try a bigger number." + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Go higher! That's too low." + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Nope, aim higher!" + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Too low! Think bigger." + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Not quite, try going up!" + COLOR_RESET
+};
+
+// Random messages for too big
+const std::vector<std::string> BIGGER_MESSAGES = {
+    std::string(COLOR_YELLOW) + "❌ Too big! Try a smaller number." + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Go lower! That's too high." + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Nope, aim lower!" + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Too high! Think smaller." + COLOR_RESET,
+    std::string(COLOR_YELLOW) + "❌ Not quite, try going down!" + COLOR_RESET
+};
+
 const std::string Game::YOUR_NUMBER_IS_SMALLER_THAN_SECRET_NUMBER =
-    std::string(COLOR_YELLOW) + "❌ Too small! Try a bigger number." + COLOR_RESET;
+    SMALLER_MESSAGES[0]; // fallback
 const std::string Game::YOUR_NUMBER_IS_BIGGER_THAN_SECRET_NUMBER =
-    std::string(COLOR_YELLOW) + "❌ Too big! Try a smaller number." + COLOR_RESET;
+    BIGGER_MESSAGES[0]; // fallback
 const std::string Game::YOU_WIN =
     std::string(COLOR_GREEN) + "✅ Congratulations! You guessed the number!" + COLOR_RESET;
 const std::string Game::YOU_LOSE =
@@ -35,6 +55,11 @@ const std::string Game::STATS_OPTION_MESSAGE =
 "║ Type /stats to see TOP 5         ║\n";
 const std::string Game::START_SCREEN_END_MESSAGE =
 "╚══════════════════════════════════╝\n";
+
+// Helper function to get random message
+static std::string get_random_message(const std::vector<std::string>& messages) {
+    return messages[rand() % messages.size()];
+}
 
 // util function to check if a string is a number
 static bool isNumber(const std::string& s) {
@@ -168,9 +193,9 @@ void Game::start_game() {
                 attempts++;
 
                 if (guess < secret) {
-                    print_something(std::to_string(attempts) + " " + YOUR_NUMBER_IS_SMALLER_THAN_SECRET_NUMBER);
+                    print_something(std::to_string(attempts) + " " + get_random_message(SMALLER_MESSAGES));
                 } else if (guess > secret) {
-                    print_something(std::to_string(attempts) + " " + YOUR_NUMBER_IS_BIGGER_THAN_SECRET_NUMBER);
+                    print_something(std::to_string(attempts) + " " + get_random_message(BIGGER_MESSAGES));
                 } else {
                     print_something(YOU_WIN);
                     std::cout << COLOR_YELLOW << "Enter your name: " << COLOR_RESET;

@@ -20,9 +20,7 @@ The game allows you to select a difficulty level and keeps track of your last 5 
 The `/stats` command displays your top 5 games, sorted by the fewest attempts.  
 
 ## How to start a game?
-You need to compile and start your project with these commands:
-g++ Main.cpp Game.cpp -o GuessGame
-./GuessGame
+you need to download latest release of game and then you need to open game.exe file
 
 ![Image of program](image.png)
 

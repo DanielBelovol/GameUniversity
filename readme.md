@@ -1,26 +1,53 @@
-# 🎯 Guess The Number Game (C++)
+🎯 Guess The Number Game
+A fun, colorful C++ console game! Try to guess the secret number with hints, select your difficulty, and track your top results.
 
-## 📘 Description  
-This is a console-based C++ game where the player tries to guess a secret number chosen by the program.  
-The game allows you to select a difficulty level and keeps track of your last 5 games.
+📦 How to Download and Run
+Download the latest release from the releases page.
 
-## 🕹️ How to Play  
-1. When the program starts, you’ll see a welcome message.  
-2. Type `/start` to begin the game or `/stats` to view your recent game stats.  
-3. Choose the difficulty level:  
-   - **easy** — range from 0 to 50  
-   - **medium** — range from 0 to 100  
-   - **high** — range from 0 to 250  
-4. The program will generate a random secret number within the selected range.  
-5. Keep guessing until you find the correct number.  
-6. After each guess, you’ll be told whether your number is smaller or bigger than the secret one.  
-7. When you win, the result (difficulty and attempts) is saved in your game history.
+Unzip if necessary.
 
-## 📊 Statistics  
-The `/stats` command displays your top 5 games, sorted by the fewest attempts.  
+Run the game.exe (Windows) file to start playing!
+No additional installation required.
 
-## How to start a game?
-you need to download latest release of game and then you need to open game.exe file
+🕹️ How to Play
+Launch the game. A stylish welcome screen will appear.
 
-![Image of program](image.png)
+Enter a command:
 
+/start — begin a new game.
+
+/stats — see your best recent results.
+
+Choose a difficulty:
+
+easy (0–50)
+
+medium (0–100)
+
+high (0–250)
+
+(Optional): Choose "bet mode" to limit your number of attempts.
+
+The program will pick a random number in the chosen range.
+
+Guess numbers—each time you'll be told if your guess is too high or too low.
+
+When you win, enter your name; your result is saved!
+
+/stats shows up to your top 5 games for each difficulty, sorted by fewest guesses.
+
+💡 Features
+3 Difficulties: easy / medium / high
+
+Bet Mode: Challenge yourself with a guess limit!
+
+Colorful Console Output: Fun ANSI colors for all messages
+
+Named Leaderboard: Save your name and see your top 5 games per difficulty
+
+Input Validation: The game helps you if you mistype
+
+🗂️ Commands Reference
+Command	Effect
+/start	Start a new game
+/stats	Show your top 5 games per difficulty
